@@ -15,6 +15,10 @@ client = TelegramClient(StringSession(session_str), 28213805, '8f80142dfef1a696b
 # Flask application
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return 'Hello, World!'
+
 async def send_riddle(chat_id):
     while True:
         await client.send_message(chat_id, '/riddle')
