@@ -55,5 +55,6 @@ if __name__ == "__main__":
     flask_thread = threading.Thread(target=run_flask_app)
     flask_thread.daemon = True
     flask_thread.start()
+    client.start()
     client.loop.create_task(main())
     client.run_until_disconnected()
