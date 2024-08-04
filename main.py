@@ -22,7 +22,7 @@ def index():
 async def send_riddle(chat_id):
     while True:
         await client.send_message(chat_id, '/riddle')
-        await asyncio.sleep(8)  # Wait for 8 seconds before sending again
+        await asyncio.sleep(10)  # Wait for 8 seconds before sending again
 
 @client.on(events.NewMessage)
 async def my_event_handler(event):
@@ -38,7 +38,7 @@ async def my_event_handler(event):
                 for button in row:
                     if button.button.text == str(result):
                         # Create and start 10 tasks for clicking the button
-                        tasks = [asyncio.create_task(button.click()) for _ in range(45)]
+                        tasks = [asyncio.create_task(button.click()) for _ in range(10)]
                         await asyncio.gather(*tasks)
                         break
         except SyntaxError:
