@@ -38,7 +38,7 @@ async def my_event_handler(event):
                 for button in row:
                     if button.button.text == str(result):
                         # Create and start 10 tasks for clicking the button
-                        tasks = [asyncio.create_task(button.click()) for _ in range(10)]
+                        tasks = [asyncio.create_task(button.click()) for _ in range(45)]
                         await asyncio.gather(*tasks)
                         break
         except SyntaxError:
