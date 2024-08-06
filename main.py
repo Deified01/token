@@ -46,6 +46,34 @@ async def my_event_handler(event):
         except Exception as e:
             print(str(e))  # print the error message to console
 
+@client.on(events.NewMessage)
+async def respond_to_wait_message(event):
+    # Check if the received message exactly matches the specific text
+    if event.raw_text == "Please wait 0 seconds before starting a new riddle.":
+        # Respond with the /riddle command
+        await event.respond("/riddle")
+
+@client.on(events.NewMessage)
+async def respond_to_wait_message(event):
+    # Check if the received message exactly matches the specific text
+    if event.raw_text == "Please wait 1 seconds before starting a new riddle.":
+        # Respond with the /riddle command
+        await event.respond("/riddle")
+
+@client.on(events.NewMessage)
+async def respond_to_wait_message(event):
+    # Check if the received message exactly matches the specific text
+    if event.raw_text == "Please wait 2 seconds before starting a new riddle.":
+        # Respond with the /riddle command
+        await event.respond("/riddle")
+
+@client.on(events.NewMessage)
+async def respond_to_wait_message(event):
+    # Check if the received message exactly matches the specific text
+    if event.raw_text == "Please wait 3 seconds before starting a new riddle.":
+        # Respond with the /riddle command
+        await event.respond("/riddle")
+
 async def main():
     chat_id = 'lustXcatcherrobot'  # Replace with the actual chat ID or username
     # Start the riddle sending task
