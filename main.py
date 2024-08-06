@@ -75,6 +75,21 @@ async def say_command(event):
         # Respond with the text once
         await event.respond(text)
 
+@client.on(events.NewMessage(pattern='Choose your spin option:'))
+async def spin_option(event):
+    # Check if the message contains "Choose your spin option"
+    if event.message.message == 'Choose your spin option':
+        # Get the buttons from the message
+        buttons = await event.get_buttons()
+        
+        # Find the button with the name "5x Spin"
+        for row in buttons:
+            for button in row:
+                if button.button.text == '5x Spin':
+                    # Click the "5x Spin" button
+                    await button.click()
+                    break
+
 @client.on(events.NewMessage)
 async def respond_to_wait_message(event):
     # Check if the received message exactly matches the specific text
