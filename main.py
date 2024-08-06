@@ -47,6 +47,7 @@ async def my_event_handler(event):
             except Exception as e:
                 print(str(e))  # print the error message to console
 
+
 @client.on(events.NewMessage(pattern='/say'))
 async def say_command(event):
     # Split the message into command and arguments
@@ -71,6 +72,7 @@ async def say_command(event):
         # Respond with the text the specified number of times
         for _ in range(num_times):
             await event.respond(text)
+            await asyncio.sleep(2)  # 2-second delay between responses
     else:
         # Respond with the text once
         await event.respond(text)
