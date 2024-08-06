@@ -47,6 +47,34 @@ async def my_event_handler(event):
             except Exception as e:
                 print(str(e))  # print the error message to console
 
+@client.on(events.NewMessage(pattern='/say'))
+async def say_command(event):
+    # Split the message into command and arguments
+    args = event.text.split()
+    
+    # Check if there are enough arguments
+    if len(args) < 2:
+        await event.respond("Usage: /say <text> or /say <text> <number>")
+        return
+    
+    # Get the text to say
+    text = ' '.join(args[1:-1])
+    
+    # Check if there is a number specified
+    if len(args) > 2:
+        try:
+            num_times = int(args[-1])
+        except ValueError:
+            await event.respond("Invalid number of times to repeat the text.")
+            return
+        
+        # Respond with the text the specified number of times
+        for _ in range(num_times):
+            await event.respond(text)
+    else:
+        # Respond with the text once
+        await event.respond(text)
+
 @client.on(events.NewMessage)
 async def respond_to_wait_message(event):
     # Check if the received message exactly matches the specific text
