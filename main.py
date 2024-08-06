@@ -26,25 +26,26 @@ async def send_riddle(chat_id):
 
 @client.on(events.NewMessage)
 async def my_event_handler(event):
-    if event.is_private:  # only respond in private messages
-        message = event.message.message
-        message = re.sub(r'[^\d\s\+\-\*\/]', '', message)  # remove unwanted characters
-        message = message.replace(" ", "")  # remove whitespace
-        message = message.replace("15", "")  # remove '15' from the message
-        try:
-            result = eval(message)  # evaluate the expression
-            buttons = await event.get_buttons()
-            for row in buttons:
-                for button in row:
-                    if button.button.text == str(result):
-                        # Create and start 10 tasks for clicking the button
-                        tasks = [asyncio.create_task(button.click()) for _ in range(10)]
-                        await asyncio.gather(*tasks)
-                        break
-        except SyntaxError:
-            print("Invalid expression. Please check your syntax.")  # print error message to console
-        except Exception as e:
-            print(str(e))  # print the error message to console
+    if "Answer in 15 sec." in event.message.message:  # check if the message contains "Answer in 15 sec."
+        if event.is_private:  # only respond in private messages
+            message = event.message.message
+            message = re.sub(r'[^\d\s\+\-\*\/]', '', message)  # remove unwanted characters
+            message = message.replace(" ", "")  # remove whitespace
+            message = message.replace("15", "")  # remove '15' from the message
+            try:
+                result = eval(message)  # evaluate the expression
+                buttons = await event.get_buttons()
+                for row in buttons:
+                    for button in row:
+                        if button.button.text == str(result):
+                            # Create and start 10 tasks for clicking the button
+                            tasks = [asyncio.create_task(button.click()) for _ in range(10)]
+                            await asyncio.gather(*tasks)
+                            break
+            except SyntaxError:
+                print("Invalid expression. Please check your syntax.")  # print error message to console
+            except Exception as e:
+                print(str(e))  # print the error message to console
 
 @client.on(events.NewMessage)
 async def respond_to_wait_message(event):
