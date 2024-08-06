@@ -22,7 +22,7 @@ def index():
 async def send_riddle(chat_id):
     while True:
         await client.send_message(chat_id, '/riddle')
-        await asyncio.sleep(10)  # Wait for 8 seconds before sending again
+        await asyncio.sleep(30)  # Wait for 8 seconds before sending again
 
 @client.on(events.NewMessage)
 async def my_event_handler(event):
