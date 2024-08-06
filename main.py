@@ -77,10 +77,10 @@ async def say_command(event):
         # Respond with the text once
         await event.respond(text)
 
-@client.on(events.NewMessage(pattern='Choose your spin option:'))
+@client.on(events.NewMessage)
 async def spin_option(event):
     # Check if the message contains "Choose your spin option"
-    if event.message.message == 'Choose your spin option':
+    if 'Choose your spin option:' in event.message.message:
         # Get the buttons from the message
         buttons = await event.get_buttons()
         
